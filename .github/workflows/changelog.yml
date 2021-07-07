@@ -28,23 +28,23 @@ jobs:
         uses: metcalfc/changelog-generator@v1.0.0
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
-          head-ref: ${{ github.sha }}
+          head-ref: github.ref # ${{ github.sha }}
           base-ref: ${{ steps.baseref.outputs.tag }}
 
       - name: Get the changelog
         run: echo '${{ steps.changelog.outputs.changelog }}' #syntax error near unexpected token `('
 
-      #- name: Create Release
-      #  id: create_release
-      #  uses: actions/create-release@latest
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  with:
-      #    tag_name: ${{ github.ref }}
-      #    release_name: Release ${{ github.ref }}
-      #    body: ${{ steps.changelog.outputs.changelog }}
-      #    draft: false
-      #    prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
 
       #- name: Send message to Slack API
       #  uses: archive/github-actions-slack@v2.0.0
