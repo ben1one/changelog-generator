@@ -20,7 +20,7 @@ jobs:
         id: ctr
         with:
           text: ${{ github.ref }}
-          regex: '^deploy-(.*?)-'
+          regex: 'deploy-(.*?)-'
 
       - name: Find Last Release Tag
         uses: oprypin/find-latest-tag@v1.1.0
