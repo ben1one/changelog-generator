@@ -27,6 +27,13 @@ jobs:
           text: ${{ github.ref }}
           regex: 'deploy-(.*?)-'
 
+      - name: Test Update Country [PROD]
+        if: startsWith(github.ref, 'refs/tags/deploy-${{ steps.ctr.outputs.group1 }}-')
+        run: |
+          cd deploy-${{ steps.ctr.outputs.group1 }}-prod
+          sleep 5
+          echo ${{ steps.ctr.outputs.group1 }}
+
       - name: Find Last Release Tag
         uses: oprypin/find-latest-tag@v1.1.0
         id: baseref
