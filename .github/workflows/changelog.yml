@@ -34,6 +34,9 @@ jobs:
       - name: Get the changelog
         run: echo '${{ steps.changelog.outputs.changelog }}' #syntax error near unexpected token `('
 
+      - id: sha_short
+        run: echo "::set-output name=val::$(git rev-parse --short HEAD)"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -41,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.sha }} to Singsaver (${{ github.ref }})
+          release_name: Release ${{ steps.sha_short.outputs.val }} to Singsaver (${{ github.ref }})
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
