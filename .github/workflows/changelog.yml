@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ steps.sha_short.outputs.val }} to Singsaver (${{ github.ref }})
+          release_name: Release ${{ steps.sha_short.outputs.val }} to Singsaver
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
