@@ -4,7 +4,12 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'deploy-*'
+      - 'deploy-singsaver-*'
+      - 'deploy-moneyhero-*'
+      - 'deploy-money101-*'
+      - 'deploy-moneyguru-*'
+      - 'deploy-moneymax-*'
+      - 'deploy-comparehero-*'
 
 jobs:
   changelog:
