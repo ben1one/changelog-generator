@@ -40,8 +40,8 @@ jobs:
           head-ref: ${{ github.sha }}
           base-ref: ${{ steps.baseref.outputs.tag }}
 
-      - name: Get the changelog
-        run: echo '${{ steps.changelog.outputs.changelog }}' #syntax error near unexpected token `('
+      #- name: Get the changelog
+      #  run: echo '${{ steps.changelog.outputs.changelog }}' #syntax error near unexpected token `('
 
       - name: Create Release
         id: create_release
