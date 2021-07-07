@@ -1,26 +1,57 @@
-name: test
-on: [push]
+name: Changelog
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'deploy-*'
 
 jobs:
-  test:
+  changelog:
     runs-on: ubuntu-latest
     steps:
-      # To use this repository's private action, you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Find Last Release Tag
+        uses: oprypin/find-latest-tag@v1.1.0
+        id: baseref
+        with:
+          repository: ${{ github.repository }}
+          prefix: 'deploy-singsaver-'
+          releases-only: true
+      - name: Log Last Release Tag        
+        run: echo '${{ steps.baseref.outputs.tag }}'
+
       - name: Generate changelog
         id: changelog
-        uses: metcalfc/changelog-generator@main
+        uses: metcalfc/changelog-generator@v1.0.0
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
-          head-ref: 'v1.0.1'
-          base-ref: 'v0.0.1'
+          head-ref: ${{ github.sha }}
+          base-ref: ${{ steps.baseref.outputs.tag }}
+
       - name: Get the changelog
-        run: echo "${{ steps.changelog.outputs.changelog }}"
-      - name: Generate changelog from release
-        id: release
-        uses: metcalfc/changelog-generator@main
-        with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Get the changelog
-        run: echo "${{ steps.release.outputs.changelog }}"
+        run: echo '${{ steps.changelog.outputs.changelog }}' #syntax error near unexpected token `('
+
+      #- name: Create Release
+      #  id: create_release
+      #  uses: actions/create-release@latest
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: ${{ github.ref }}
+      #    release_name: Release ${{ github.ref }}
+      #    body: ${{ steps.changelog.outputs.changelog }}
+      #    draft: false
+      #    prerelease: false
+
+      #- name: Send message to Slack API
+      #  uses: archive/github-actions-slack@v2.0.0
+      #  id: notify
+      #  with:
+      #    slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+      #    slack-channel: CPPUV5KU0
+      #    slack-text: Hello! Event "${{ github.event_name }}" in "${{ github.repository }} ${{ steps.changelog.outputs.changelog }}"
+      #- name: Result from "Send Message"
+      #  run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
