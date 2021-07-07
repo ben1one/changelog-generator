@@ -16,8 +16,8 @@ jobs:
       - id: sha_short
         run: echo "::set-output name=val::$(git rev-parse --short HEAD)"
 
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: ctr
+      - id: ctr
+        uses: actions-ecosystem/action-regex-match@v2
         with:
           text: ${{ github.ref }}
           regex: 'deploy-(.*?)-'
@@ -27,7 +27,7 @@ jobs:
         id: baseref
         with:
           repository: ${{ github.repository }}
-          prefix: 'deploy-singsaver-'
+          prefix: 'deploy-${{ steps.ctr.outputs.group1 }}-'
           releases-only: true
       - name: Log Last Release Tag        
         run: echo '${{ steps.baseref.outputs.tag }}'
