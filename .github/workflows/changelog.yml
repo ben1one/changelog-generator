@@ -75,4 +75,4 @@ jobs:
           channel-id: 'C0274KS2L87'  # Slack channel id to post message
           slack-message: ${{ steps.changelog.outputs.changelog }}
         env:
-          SLACK_BOT_TOKEN: RwQDEErJWDLG5AnXYROH5Hdj
+          SLACK_BOT_TOKEN: xoxb-206242252071-2270433947361-TVbgcMb7XenXDBTPigGnLZVQ
