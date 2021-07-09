@@ -60,16 +60,18 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Escape     
+      - name: Escape
+        id: foo
         run: |
           printf -v var "%q\n" "${{ steps.changelog.outputs.changelog }}"
           echo "$var"
+          echo "::set-output name=val::$var"
 
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.14.0
         with:
-          payload: '{\"msg\":\"${{ steps.changelog.outputs.changelog }}\"}'
+          payload: '{\"msg\":\"${{ steps.foo.outputs.val }}\"}'
         env:
           SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
 
