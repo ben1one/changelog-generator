@@ -60,19 +60,19 @@ jobs:
           draft: false
           prerelease: false
 
-      #- name: Send custom JSON data to Slack workflow
-      #  id: slack
-      #  uses: slackapi/slack-github-action@v1.14.0
-      #  with:
-      #    payload: "{\"msg\":\"${{ steps.changelog.outputs.changelog }}\",\"foo\":\"bar\"}"
-      #  env:
-      #    SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
-
-      - name: Post to a Slack channel
+      - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.14.0
         with:
-          channel-id: 'C0274KS2L87'  # Slack channel id to post message
-          slack-message: ${{ steps.changelog.outputs.changelog }}
+          payload: \{\"msg\":\"${{ steps.changelog.outputs.changelog }}\"\}
         env:
-          SLACK_BOT_TOKEN: xoxb-206242252071-2270433947361-TVbgcMb7XenXDBTPigGnLZVQ
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
+
+      #- name: Post to a Slack channel
+      #  id: slack
+      #  uses: slackapi/slack-github-action@v1.14.0
+      #  with:
+      #    channel-id: 'C0274KS2L87'  # Slack channel id to post message
+      #    slack-message: ${{ steps.changelog.outputs.changelog }}
+      #  env:
+      #    SLACK_BOT_TOKEN: xoxb-206242252071-2270433947361-TVbgcMb7XenXDBTPigGnLZVQ
