@@ -1,0 +1,18 @@
+name: Deploy Tagged FE Service to Prod
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  deploy:
+    name: Slack
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.14.0
+      with:
+        payload: "{\"msg\":\"hi\",\"foo\":\"bar\"}"
+      env:
+        SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
