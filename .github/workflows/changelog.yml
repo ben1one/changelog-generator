@@ -87,7 +87,6 @@ jobs:
             New Version: 5e4b8fa
             ${{ steps.changelog.outputs.changelog }}
             ```
-            >${{ steps.changelog.outputs.changelog }}>
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
