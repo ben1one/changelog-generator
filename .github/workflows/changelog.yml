@@ -71,7 +71,7 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.14.0
         with:
-          payload: '{"msg":"hello"}'
+          payload: "{\"msg\":\"value\"}"
         env:
           SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
 
