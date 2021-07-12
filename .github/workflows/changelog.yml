@@ -80,7 +80,10 @@ jobs:
         uses: slackapi/slack-github-action@v1.14.0
         with:
           channel-id: 'C0274KS2L87'  # Slack channel id to post message
-          slack-message: ${{ steps.changelog.outputs.changelog }}
+          slack-message: |
+            Hi @here
+            :rocket: We just release a new ECMS version to MG
+            `${{ steps.changelog.outputs.changelog }}`
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
