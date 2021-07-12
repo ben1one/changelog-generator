@@ -81,9 +81,9 @@ jobs:
         with:
           channel-id: 'C0274KS2L87'  # Slack channel id to post message
           slack-message: |
-            Hi @here
+            Hi <!here|here>
             :rocket: We just release a new ECMS version to MG
-            `${{ steps.changelog.outputs.changelog }}`
+            ```${{ steps.changelog.outputs.changelog }}```
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
