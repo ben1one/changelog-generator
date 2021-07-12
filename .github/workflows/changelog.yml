@@ -83,10 +83,10 @@ jobs:
           slack-message: |
             Hi <!here|here>
             :rocket: We just release a new ECMS version to MG
-            ```
+            \n>
             New Version: 5e4b8fa
             ${{ steps.changelog.outputs.changelog }}
-            ```
+            \n>
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
