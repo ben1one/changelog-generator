@@ -76,16 +76,19 @@ jobs:
       #    SLACK_WEBHOOK_URL: https://hooks.slack.com/workflows/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
 
       - id: channel
-        run: |
-          declare -a channel
-          channel[singsaver]=C0274KS2L87
-          echo "::set-output name=val::channel"
+        uses: actions-ecosystem/action-regex-match@v2
+        with:
+          text: |
+            singsaver:C0274KS2L87;
+            moneyhero:C0274KS2L87;
+            money101:C0274KS2L87;
+          regex: '${{ steps.ctr.outputs.group1 }}:(.*?);'
 
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.14.0
         with:
-          channel-id: ${{ steps.channel.outputs.val[${{ steps.ctr.outputs.group1 }}] }}
+          channel-id: ${{ steps.channel.outputs.group1 }}
           slack-message: |
             Hi <!here|here>
             :rocket: We just release a new ECMS version to ${{ steps.ctr.outputs.group1 }}
