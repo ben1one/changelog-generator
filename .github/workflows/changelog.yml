@@ -85,7 +85,7 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.14.0
         with:
-          channel-id: ${{ steps.channel.outputs.val }}[${{ steps.ctr.outputs.group1 }}]
+          channel-id: ${{ steps.channel.outputs.val[${{ steps.ctr.outputs.group1 }}] }}
           slack-message: |
             Hi <!here|here>
             :rocket: We just release a new ECMS version to ${{ steps.ctr.outputs.group1 }}
