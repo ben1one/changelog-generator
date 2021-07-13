@@ -77,7 +77,7 @@ jobs:
 
       - id: channel
         run: |
-          declare -A channel
+          declare -a channel
           channel[singsaver]=C0274KS2L87
           echo "::set-output name=val::channel"
 
